@@ -4,15 +4,17 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+// import SvgIcon from 'vue-svgicon'
+
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
-import App from './App'
+import App from './App.vue'
 import store from './store'
 import router from './router'
 
-import '@/icons' // icon
+// import '@/icons' // icon
 import '@/permission' // permission control
 
 /**
@@ -23,16 +25,23 @@ import '@/permission' // permission control
  * Currently MockJs will be used in the production environment,
  * please remove it before going online! ! !
  */
-import { mockXHR } from '../mock'
-if (process.env.NODE_ENV === 'production') {
-  mockXHR()
-}
+// import { mockXHR } from '../mock'
+// if (process.env.NODE_ENV === 'production') {
+//   mockXHR()
+// }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI)
+
+// Vue.use(SvgIcon, {
+//   tagName: 'svg-icon',
+//   defaultWidth: '1em',
+//   defaultHeight: '1em'
+// })
 
 Vue.config.productionTip = false
 
+// eslint-disabled-nextline
 new Vue({
   el: '#app',
   router,

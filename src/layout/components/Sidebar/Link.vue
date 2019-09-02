@@ -1,36 +1,30 @@
-
 <template>
-  <!-- eslint-disable vue/require-component-is -->
-  <component v-bind="linkProps(to)">
+  <a
+    v-if="isExternal(to)"
+    :href="to"
+    target="_blank"
+    rel="noopener"
+  >
     <slot />
-  </component>
+  </a>
+  <router-link
+    v-else
+    :to="to"
+  >
+    <slot />
+  </router-link>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { isExternal } from '@/utils/validate'
 
-export default {
-  props: {
-    to: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    linkProps(url) {
-      if (isExternal(url)) {
-        return {
-          is: 'a',
-          href: url,
-          target: '_blank',
-          rel: 'noopener'
-        }
-      }
-      return {
-        is: 'router-link',
-        to: url
-      }
-    }
-  }
+@Component({
+  name: 'SidebarItemLink'
+})
+export default class extends Vue {
+  @Prop({ required: true }) private to!: string
+
+  private isExternal = isExternal
 }
 </script>
